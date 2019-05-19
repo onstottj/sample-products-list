@@ -8,6 +8,7 @@
     "@types/react": "16.8.17",
     "@types/react-dom": "16.8.4",
     "antd": "^3.18.1",
+    "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.0",
     "customize-cra": "^0.2.12",
     "react": "^16.8.6",
