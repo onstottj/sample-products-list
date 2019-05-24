@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Avatar, List, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
-import Product, { ProductListResponse } from './Product';
-import { ProductApi } from '../util/ProductApi';
+import Product from '../Product';
+import ProductListResponse from '../ProductListResponse';
+import { ProductApi } from '../ProductApi';
 import './ProductList.css';
 
 type ProductListState = {

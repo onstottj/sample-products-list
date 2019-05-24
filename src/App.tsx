@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductList } from './products/ProductList';
+import { ProductList } from './products/product-list/ProductList';
 import './App.css';
 
 const App: React.FC = () => {

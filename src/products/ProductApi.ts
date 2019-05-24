@@ -1,5 +1,5 @@
-import { ProductListResponse } from '../products/Product';
 import Axios from 'axios';
+import ProductListResponse from './ProductListResponse';
 
 /** Utility class for retrieving products */
 export class ProductApi {

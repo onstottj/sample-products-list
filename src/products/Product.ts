@@ -1,11 +1,3 @@
-export interface ProductListResponse {
-	products: Product[],
-	totalProducts: number,
-	pageNumber: number,
-	pageSize: number,
-	statusCode: number
-}
-
 export default interface Product {
 	productId: string,
 	productName: string,
