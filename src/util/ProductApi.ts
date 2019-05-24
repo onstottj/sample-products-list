@@ -1,14 +1,15 @@
-import { Product } from '../products/Product';
-import Axios, { AxiosPromise } from 'axios';
+import { ProductListResponse } from '../products/Product';
+import Axios from 'axios';
 
 /** Utility class for retrieving products */
 export class ProductApi {
 
 	private static baseUrl = 'https://mobile-tha-server.firebaseapp.com';
 
-	public static getProducts(pageNumber: number, pageSize: number): AxiosPromise<Product[]> {
+	public static async getProducts(pageNumber: number, pageSize: number): Promise<ProductListResponse> {
 		const url = `${ProductApi.baseUrl}/walmartproducts/${pageNumber}/${pageSize}`;
-		return Axios.get(url);
+		const axiosResponse = await Axios.get(url);
+		return axiosResponse.data;
 	}
 
 }
