@@ -13,7 +13,7 @@ const App = () => {
 				<h1>Sample Store</h1>
 			</Layout.Header>
 			<Layout.Content>
-				{!hasProducts && <div className="initial-spinner"><Spin/></div>}
+				{!hasProducts && <div className="initial-spinner"><Spin tip="Loading..." size="large"/></div>}
 				<ProductList isDisplayed={hasProducts} onProductsLoaded={() => setHasProducts(true)}/>
 			</Layout.Content>
 		</Layout>

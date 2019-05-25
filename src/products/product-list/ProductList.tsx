@@ -81,14 +81,6 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 		return Promise.resolve();	// this promise isn't actively used, but is needed since this is an async function
 	}
 
-	private createLoadingIndicator(): ReactElement {
-		return (
-			<div className="loading-more-indicator">
-				<Spin/>
-			</div>
-		);
-	}
-
 	render() {
 		const showLoadingIndicator = this.state.isLoading && this.state.hasMore;
 		const classes = `product-list ${!this.props.isDisplayed ? 'hidden' : ''}`;
@@ -99,13 +91,13 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 									pageStart={0}
 									loadMore={this.handleInfiniteOnLoad}
 									hasMore={!this.state.isLoading && this.state.hasMore}
-									useWindow={true}>
+									useWindow={false}>
 						<div className="product-grid">
-							{this.state.loadedProducts.length === 0 && <Empty/>}
+							{this.state.loadedProducts.length === 0 && <Empty description="No Products Available"/>}
 							{this.state.loadedProducts.map(product => (
 								<ProductCard key={product.productId} product={product}/>
 							))}
-							{showLoadingIndicator && this.createLoadingIndicator()}
+							{showLoadingIndicator && <Spin className="loading-more-indicator" tip="Loading more..." size="large"/>}
 						</div>
 					</InfiniteScroll>
 				</div>
