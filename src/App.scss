@@ -1,4 +1,4 @@
-$header-height: 64px;
+@import "variables";
 
 .ant-layout-header {
 	// Fixed header, based on https://ant.design/components/layout/#components-layout-demo-fixed
@@ -8,6 +8,7 @@ $header-height: 64px;
 	background-color: dimgray;
 	height: $header-height;
 	line-height: $header-height;
+	box-shadow: 0 0 2px 2px darkgray;
 
 	h1 {
 		color: white;

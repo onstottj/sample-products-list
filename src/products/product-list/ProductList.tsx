@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Product from '../Product';
 import ProductListResponse from '../ProductListResponse';
 import { ProductApi } from '../ProductApi';
+import ProductCard from './ProductCard';
 import './ProductList.scss';
 
 type ProductListState = {
@@ -71,25 +72,23 @@ export class ProductList extends Component<any, ProductListState> {
 	}
 
 	private createProductRow(product: Product): ReactElement {
-		let imageUrl = product.getImageUrl();
 		return (
 			<List.Item key={product.productId}>
-				<Card hoverable className="product-list-card">
-					{imageUrl && <img className="product-image" alt="Product" src={imageUrl}/>}
-					<div className="product-name">{product.productName}</div>
-					{/*	dangerouslySetInnerHTML is used in order to display the description's HTML... we're
-					trusting the DB for having safe data to display, but typically we wouldn't do this */}
-					<div dangerouslySetInnerHTML={{__html: product.shortDescription || '<i>View details</i>'}}/>
-					<div className="card-overlay view-details-overlay">
-						View Details
-					</div>
-					<div className="card-overlay bottom-white-mask"/>
-				</Card>
+				<ProductCard product={product}/>
 			</List.Item>
 		);
 	}
 
+	private createLoadingIndicator(): ReactElement {
+		return (
+			<div className="loading-container">
+				<Spin/>
+			</div>
+		);
+	}
+
 	render() {
+		const showLoadingIndicator = this.state.isLoading && this.state.hasMore;
 		return (
 			<>
 				<div className="infinite-container">
@@ -110,11 +109,7 @@ export class ProductList extends Component<any, ProductListState> {
 								  xxl: 6,
 							  }}
 							  renderItem={product => this.createProductRow(product)}>
-							{this.state.isLoading && this.state.hasMore && (
-								<div className="loading-container">
-									<Spin/>
-								</div>
-							)}
+							{showLoadingIndicator && this.createLoadingIndicator()}
 						</List>
 					</InfiniteScroll>
 				</div>
