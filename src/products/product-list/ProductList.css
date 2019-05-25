@@ -3,7 +3,6 @@
 	border-radius: 4px;
 	overflow: auto;
 	padding: 8px 24px;
-	height: 300px;
 }
 
 .demo-loading-container {
@@ -11,4 +10,8 @@
 	bottom: 40px;
 	width: 100%;
 	text-align: center;
+}
+
+.empty-description {
+	font-style: italic;
 }

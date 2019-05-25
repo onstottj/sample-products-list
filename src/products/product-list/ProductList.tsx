@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactElement } from 'react';
 import { Avatar, List, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import Product from '../Product';
@@ -27,7 +27,11 @@ export class ProductList extends Component<any, ProductListState> {
 
 	constructor(props: Readonly<any>) {
 		super(props);
+
+		// Workaround for React having trouble remembering 'this'; see https://reactjs.org/docs/handling-events.html
 		this.fetchData = this.fetchData.bind(this);
+		this.checkForMoreProducts = this.checkForMoreProducts.bind(this);
+		this.handleInfiniteOnLoad = this.handleInfiniteOnLoad.bind(this);
 	}
 
 	async componentDidMount(): Promise<void> {
@@ -68,6 +72,20 @@ export class ProductList extends Component<any, ProductListState> {
 		return Promise.resolve();	// this promise isn't actively used, but is needed since this is an async function
 	}
 
+	private createProductRow(product: Product): ReactElement {
+		const summary = product.getSummary();
+		return (
+			<List.Item key={product.productId}>
+				<List.Item.Meta avatar={<Avatar src={product.productImage}/>}
+								title={<a href="https://ant.design">{product.productName}</a>}/>
+				<div dangerouslySetInnerHTML={{__html: product.productName || ''}}/>
+				{/*	dangerouslySetInnerHTML is used here since there are unicode characters to display */}
+				{summary && <div dangerouslySetInnerHTML={{__html: summary}}/>}
+				{!summary && <div className="empty-description">Click to view details</div>}
+			</List.Item>
+		);
+	}
+
 	render() {
 		return (
 			<div className="demo-infinite-container">
@@ -75,16 +93,10 @@ export class ProductList extends Component<any, ProductListState> {
 								pageStart={0}
 								loadMore={this.handleInfiniteOnLoad}
 								hasMore={!this.state.isLoading && this.state.hasMore}
-								useWindow={false}>
+								useWindow={true}>
 					<List dataSource={this.state.loadedProducts}
-						  renderItem={product => (
-							  <List.Item key={product.productId}>
-								  <List.Item.Meta avatar={<Avatar src={product.productImage}/>}
-												  title={<a href="https://ant.design">{product.productName}</a>}
-												  description={product.shortDescription}/>
-								  <div>{product.longDescription}</div>
-							  </List.Item>
-						  )}>
+						  itemLayout="vertical"
+						  renderItem={product => this.createProductRow(product)}>
 						{this.state.isLoading && this.state.hasMore && (
 							<div className="demo-loading-container">
 								<Spin/>
