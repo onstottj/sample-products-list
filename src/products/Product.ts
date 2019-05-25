@@ -1,5 +1,5 @@
-import striptags from 'striptags';
 import { StringUtil } from '../util/StringUtil';
+import { ProductApi } from './ProductApi';
 
 /**
  * Note about 'undefined 'here: I was tempted to use "| null" and initialize these to null, but a lot of Ant Design
@@ -35,13 +35,8 @@ export default class Product {
 		this.longDescription = StringUtil.removeInvalidCharacters(this.longDescription);
 	}
 
-	getSummary(): string | null {
-		// See https://www.npmjs.com/package/striptags
-		const rawDescription = striptags(this.longDescription || '');
-		let shouldTruncate = rawDescription.length >= Product.maxSummaryLength;
-		return shouldTruncate
-			? `${rawDescription.substr(0, Product.maxSummaryLength)}...`
-			: rawDescription;
+	getImageUrl(): string | null {
+		return this.productImage ? `${ProductApi.baseUrl}/${this.productImage}` : null;
 	}
 
 }

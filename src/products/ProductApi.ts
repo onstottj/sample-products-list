@@ -5,7 +5,7 @@ import Product from './Product';
 /** Utility class for retrieving products */
 export class ProductApi {
 
-	private static baseUrl = 'https://mobile-tha-server.firebaseapp.com';
+	public static baseUrl = 'https://mobile-tha-server.firebaseapp.com';
 
 	public static async getProducts(pageNumber: number, pageSize: number): Promise<ProductListResponse> {
 		const url = `${ProductApi.baseUrl}/walmartproducts/${pageNumber}/${pageSize}`;

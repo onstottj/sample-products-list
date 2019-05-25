@@ -1,10 +1,10 @@
 import React, { Component, ReactElement } from 'react';
-import { Avatar, BackTop, List, Spin } from 'antd';
+import { BackTop, Card, List, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import Product from '../Product';
 import ProductListResponse from '../ProductListResponse';
 import { ProductApi } from '../ProductApi';
-import './ProductList.css';
+import './ProductList.scss';
 
 type ProductListState = {
 	loadedProducts: Product[],
@@ -15,7 +15,7 @@ type ProductListState = {
 /** The list of products uses infinite scrolling; see https://ant.design/components/list/#components-list-demo-infinite-load */
 export class ProductList extends Component<any, ProductListState> {
 
-	private static pageSize = 20;
+	private static pageSize = 30;
 
 	state: ProductListState = {
 		loadedProducts: [],
@@ -71,14 +71,16 @@ export class ProductList extends Component<any, ProductListState> {
 	}
 
 	private createProductRow(product: Product): ReactElement {
-		const summary = product.getSummary();
+		let imageUrl = product.getImageUrl();
 		return (
 			<List.Item key={product.productId}>
-				<List.Item.Meta avatar={<Avatar src={product.productImage}/>}
-								title={<a href="https://ant.design">{product.productName}</a>}/>
-				{/*	dangerouslySetInnerHTML is used here since there are unicode characters to display */}
-				{summary && <div dangerouslySetInnerHTML={{__html: summary}}/>}
-				{!summary && <div className="empty-description">Click to view details</div>}
+				<Card hoverable className="product-list-card">
+					{imageUrl && <img className="product-image" alt="Product" src={imageUrl}/>}
+					<div className="product-name">{product.productName}</div>
+					{/*	dangerouslySetInnerHTML is used in order to display the description's HTML... we're
+					trusting the DB for having safe data to display, but typically we wouldn't do this */}
+					<div dangerouslySetInnerHTML={{__html: product.shortDescription || '<i>View details</i>'}}/>
+				</Card>
 			</List.Item>
 		);
 	}
@@ -94,6 +96,15 @@ export class ProductList extends Component<any, ProductListState> {
 									useWindow={true}>
 						<List dataSource={this.state.loadedProducts}
 							  itemLayout="vertical"
+							  grid={{
+								  gutter: 16,
+								  xs: 1,
+								  sm: 6,
+								  md: 6,
+								  lg: 6,
+								  xl: 6,
+								  xxl: 6,
+							  }}
 							  renderItem={product => this.createProductRow(product)}>
 							{this.state.isLoading && this.state.hasMore && (
 								<div className="demo-loading-container">
