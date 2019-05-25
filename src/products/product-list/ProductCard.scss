@@ -1,53 +1,79 @@
 @import "../../variables";
 
-$widescreen-card-height: 475px;
-
-.product-list-card {
+.ant-card {
+	display: flex;
+	flex-direction: column;
 	min-width: $card-width;
 	max-width: $card-width;
-	height: $widescreen-card-height;
-	max-height: $widescreen-card-height;
-	overflow-y: hidden;
-	position: relative;
+	height: $card-height;
+	max-height: $card-height;
 	margin: $card-spacing / 2;
 
-	.product-name {
-		font-weight: bold;
-		font-size: $larger-font;
-		text-align: center;
-		margin-bottom: 1em;
-	}
+	.ant-card-body {
+		flex: 1; // take up available height
+		overflow: hidden;
+		padding-bottom: 0;
 
-	.product-image {
-		width: 90%;
-	}
+		.product-card-content {
+			position: relative;
+			height: 100%;
+			overflow: hidden;
 
-	.product-price {
-		text-align: center;
+			.product-name {
+				font-weight: bold;
+				font-size: $larger-font;
+				text-align: center;
+			}
 
-		.ant-statistic-content {
-			font-size: $larger-font;
+			.product-image {
+				text-align: center;
+
+				img {
+					width: 80%;
+				}
+			}
+
+			.product-price {
+				text-align: center;
+				margin-bottom: 1em;
+
+				.ant-statistic-content {
+					font-size: $larger-font;
+				}
+			}
+
+			.card-overlay {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				right: 0;
+				left: 0;
+			}
+
+			.bottom-white-mask {
+				z-index: 100;
+				background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, 1) 100%);
+			}
 		}
 	}
 
-	.card-overlay {
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		right: 0;
-		left: 0;
+	.ant-card-actions {
+		& > li {
+			margin: 5px 0;
+		}
+
+		.ant-rate {
+			font-size: 1.5em;
+		}
+
+		.product-reviews {
+			font-size: .75em;
+		}
 	}
 
-	.view-details-title {
-		text-align: center;
-		color: $link-color;
-		font-size: $larger-font;
-		font-style: italic;
-		font-weight: bold;
-	}
-
-	.bottom-white-mask {
-		z-index: 100;
-		background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 85%, rgba(255, 255, 255, .9) 93%, rgba(255, 255, 255, 1) 95%);
+	&:hover {
+		border-color: lightskyblue;
+		box-shadow: 0 0 $card-hover-glow $card-hover-glow lightblue;
+		cursor: pointer;
 	}
 }
