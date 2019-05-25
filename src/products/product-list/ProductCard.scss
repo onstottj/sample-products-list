@@ -3,20 +3,29 @@
 $widescreen-card-height: 475px;
 
 .product-list-card {
+	max-width: 260px;
 	height: $widescreen-card-height;
 	max-height: $widescreen-card-height;
 	overflow-y: hidden;
 	position: relative;
 
+	.product-name {
+		font-weight: bold;
+		font-size: $larger-font;
+		text-align: center;
+		margin-bottom: 1em;
+	}
+
 	.product-image {
 		width: 90%;
 	}
 
-	.product-name {
-		font-weight: bold;
-		font-size: 1.1em;
+	.product-price {
 		text-align: center;
-		margin-bottom: 1em;
+
+		.ant-statistic-content {
+			font-size: $larger-font;
+		}
 	}
 
 	.card-overlay {
@@ -27,20 +36,12 @@ $widescreen-card-height: 475px;
 		left: 0;
 	}
 
-	.view-details-overlay {
-		display: none;
-		z-index: 200;
+	.view-details-title {
 		text-align: center;
-		padding-top: 20px;
 		color: $link-color;
-		font-size: 1.1em;
+		font-size: $larger-font;
 		font-style: italic;
 		font-weight: bold;
-	}
-
-	// See https://css-tricks.com/the-sass-ampersand/
-	&:hover .view-details-overlay {
-		display: block;
 	}
 
 	.bottom-white-mask {

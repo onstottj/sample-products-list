@@ -1,11 +1,16 @@
 import React, { Component, ReactElement } from 'react';
-import { BackTop, Card, List, Spin } from 'antd';
+import { BackTop, List, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import Product from '../Product';
 import ProductListResponse from '../ProductListResponse';
 import { ProductApi } from '../ProductApi';
 import ProductCard from './ProductCard';
 import './ProductList.scss';
+
+type ProductListProps = {
+	isDisplayed: boolean,
+	onProductsLoaded: () => void,
+};
 
 type ProductListState = {
 	loadedProducts: Product[],
@@ -14,9 +19,9 @@ type ProductListState = {
 }
 
 /** The list of products uses infinite scrolling; see https://ant.design/components/list/#components-list-demo-infinite-load */
-export class ProductList extends Component<any, ProductListState> {
+export class ProductList extends Component<ProductListProps, ProductListState> {
 
-	private static pageSize = 30;
+	private static pageSize = 24;	// the max we can load is 30; this is 4 rows of 6 products (we show a max of 6 across)
 
 	state: ProductListState = {
 		loadedProducts: [],
@@ -26,7 +31,7 @@ export class ProductList extends Component<any, ProductListState> {
 
 	private currentPage = 1;
 
-	constructor(props: Readonly<any>) {
+	constructor(props: Readonly<ProductListProps>) {
 		super(props);
 
 		// Workaround for React having trouble remembering 'this'; see https://reactjs.org/docs/handling-events.html
@@ -38,7 +43,7 @@ export class ProductList extends Component<any, ProductListState> {
 	async componentDidMount(): Promise<void> {
 		// TODO: add error msg
 		const products = await this.fetchData();
-		this.setState({loadedProducts: products});
+		this.onProductsLoaded(products);
 	}
 
 	private async fetchData(): Promise<Product[]> {
@@ -47,6 +52,14 @@ export class ProductList extends Component<any, ProductListState> {
 		this.checkForMoreProducts(response);
 		this.currentPage++;
 		return response.products;
+	}
+
+	private onProductsLoaded(products: Product[]): void {
+		this.setState({
+			loadedProducts: products,
+			isLoading: false,
+		});
+		this.props.onProductsLoaded();	// notify the parent that products have been loaded (or if there aren't any, at least we tried)
 	}
 
 	private checkForMoreProducts(response: ProductListResponse): void {
@@ -64,10 +77,7 @@ export class ProductList extends Component<any, ProductListState> {
 		const newProducts = await this.fetchData();
 		let allProducts = [...previousProducts, ...newProducts];
 
-		this.setState({
-			loadedProducts: allProducts,
-			isLoading: false,
-		});
+		this.onProductsLoaded(allProducts);
 		return Promise.resolve();	// this promise isn't actively used, but is needed since this is an async function
 	}
 
@@ -81,7 +91,7 @@ export class ProductList extends Component<any, ProductListState> {
 
 	private createLoadingIndicator(): ReactElement {
 		return (
-			<div className="loading-container">
+			<div className="loading-more-indicator">
 				<Spin/>
 			</div>
 		);
@@ -89,8 +99,9 @@ export class ProductList extends Component<any, ProductListState> {
 
 	render() {
 		const showLoadingIndicator = this.state.isLoading && this.state.hasMore;
+		const classes = `product-list ${!this.props.isDisplayed ? 'hidden' : ''}`;
 		return (
-			<>
+			<div className={classes}>
 				<div className="infinite-container">
 					<InfiniteScroll initialLoad={false}
 									pageStart={0}
@@ -114,7 +125,7 @@ export class ProductList extends Component<any, ProductListState> {
 					</InfiniteScroll>
 				</div>
 				<BackTop className="back-to-top-indicator"/>
-			</>
+			</div>
 		);
 	}
 

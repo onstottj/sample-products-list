@@ -1,14 +1,35 @@
-.infinite-container {
-	overflow: auto;
-}
+@import "../../variables";
 
-.loading-container {
-	position: absolute;
-	bottom: 40px;
-	width: 100%;
-	text-align: center;
-}
+.product-list {
 
-.back-to-top-indicator {
-	z-index: 300;
+	display: flex;
+	justify-content: center;
+	padding: 0 50px;
+
+	&.hidden {
+		display: none;
+	}
+
+	.infinite-container {
+		display: flex;
+		overflow: auto;
+		max-width: ($max-card-width + 50px) * 6;
+
+		.ant-list-item {
+			display: flex;
+			justify-content: center;
+		}
+
+		.loading-more-indicator {
+			position: absolute;
+			bottom: 40px;
+			width: 100%;
+			text-align: center;
+		}
+	}
+
+	.back-to-top-indicator {
+		z-index: 300;
+	}
+
 }

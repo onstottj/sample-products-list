@@ -1,23 +1,31 @@
 @import "variables";
 
-.ant-layout-header {
-	// Fixed header, based on https://ant.design/components/layout/#components-layout-demo-fixed
-	position: fixed;
-	width: 100%;
-	z-index: 1000;
-	background-color: dimgray;
-	height: $header-height;
-	line-height: $header-height;
-	box-shadow: 0 0 2px 2px darkgray;
+.ant-layout {
+	.ant-layout-header {
+		// Fixed header, based on https://ant.design/components/layout/#components-layout-demo-fixed
+		position: fixed;
+		width: 100%;
+		z-index: 1000;
+		background-color: dimgray;
+		height: $header-height;
+		line-height: $header-height;
+		box-shadow: 0 0 2px 2px darkgray;
 
-	h1 {
-		color: white;
-		text-align: center;
-		font-style: italic;
+		h1 {
+			color: white;
+			text-align: center;
+			font-style: italic;
+		}
 	}
-}
 
-.ant-layout-content {
-	padding: 0 100px;
-	margin-top: $header-height;
+	.ant-layout-content {
+		margin-top: $header-height;
+
+		.initial-spinner {
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
 }
