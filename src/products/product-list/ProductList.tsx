@@ -1,5 +1,5 @@
 import React, { Component, ReactElement } from 'react';
-import { BackTop, List, Spin } from 'antd';
+import { BackTop, Empty, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import Product from '../Product';
 import ProductListResponse from '../ProductListResponse';
@@ -81,14 +81,6 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 		return Promise.resolve();	// this promise isn't actively used, but is needed since this is an async function
 	}
 
-	private createProductRow(product: Product): ReactElement {
-		return (
-			<List.Item key={product.productId}>
-				<ProductCard product={product}/>
-			</List.Item>
-		);
-	}
-
 	private createLoadingIndicator(): ReactElement {
 		return (
 			<div className="loading-more-indicator">
@@ -108,23 +100,16 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 									loadMore={this.handleInfiniteOnLoad}
 									hasMore={!this.state.isLoading && this.state.hasMore}
 									useWindow={true}>
-						<List dataSource={this.state.loadedProducts}
-							  itemLayout="vertical"
-							  grid={{
-								  gutter: 16,
-								  xs: 1,
-								  sm: 6,
-								  md: 6,
-								  lg: 6,
-								  xl: 6,
-								  xxl: 6,
-							  }}
-							  renderItem={product => this.createProductRow(product)}>
+						<div className="product-grid">
+							{this.state.loadedProducts.length === 0 && <Empty/>}
+							{this.state.loadedProducts.map(product => (
+								<ProductCard key={product.productId} product={product}/>
+							))}
 							{showLoadingIndicator && this.createLoadingIndicator()}
-						</List>
+						</div>
 					</InfiniteScroll>
 				</div>
-				<BackTop className="back-to-top-indicator"/>
+				<BackTop/>
 			</div>
 		);
 	}

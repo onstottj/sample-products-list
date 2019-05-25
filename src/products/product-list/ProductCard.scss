@@ -3,11 +3,13 @@
 $widescreen-card-height: 475px;
 
 .product-list-card {
-	max-width: 260px;
+	min-width: $card-width;
+	max-width: $card-width;
 	height: $widescreen-card-height;
 	max-height: $widescreen-card-height;
 	overflow-y: hidden;
 	position: relative;
+	margin: $card-spacing / 2;
 
 	.product-name {
 		font-weight: bold;

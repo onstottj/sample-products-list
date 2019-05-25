@@ -8,9 +8,6 @@ import { ProductApi } from './ProductApi';
  */
 export default class Product {
 
-	/** Length in characters */
-	private static maxSummaryLength = 150;
-
 	public productId?: string | undefined;
 	public productName: string | undefined;
 	/** This can include raw HTML */

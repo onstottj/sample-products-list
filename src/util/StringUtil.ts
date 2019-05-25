@@ -8,4 +8,12 @@ export class StringUtil {
 		return input ? input.replace(/\uFFFD/g, replacement) : '';
 	}
 
+	// TODO
+	static truncateWithEllipsis(input: string, maxLength: number): string {
+		let shouldTruncate = input.length >= maxLength;
+		return shouldTruncate
+			? `${input.substr(0, maxLength - 3)}...`
+			: input;
+	}
+
 }
