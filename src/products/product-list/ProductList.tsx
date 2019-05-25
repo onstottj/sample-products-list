@@ -1,5 +1,5 @@
 import React, { Component, ReactElement } from 'react';
-import { Avatar, List, Spin } from 'antd';
+import { Avatar, BackTop, List, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import Product from '../Product';
 import ProductListResponse from '../ProductListResponse';
@@ -51,8 +51,6 @@ export class ProductList extends Component<any, ProductListState> {
 	private checkForMoreProducts(response: ProductListResponse): void {
 		const previouslyDisplayedProducts = (this.currentPage - 1) * ProductList.pageSize;
 		const latestProductShown = previouslyDisplayedProducts + response.products.length;
-		// todo
-		console.log(`am i at the latest?`, latestProductShown, latestProductShown >= response.totalProducts);
 		if (latestProductShown >= response.totalProducts) {
 			this.setState({hasMore: false});
 		}
@@ -78,7 +76,6 @@ export class ProductList extends Component<any, ProductListState> {
 			<List.Item key={product.productId}>
 				<List.Item.Meta avatar={<Avatar src={product.productImage}/>}
 								title={<a href="https://ant.design">{product.productName}</a>}/>
-				<div dangerouslySetInnerHTML={{__html: product.productName || ''}}/>
 				{/*	dangerouslySetInnerHTML is used here since there are unicode characters to display */}
 				{summary && <div dangerouslySetInnerHTML={{__html: summary}}/>}
 				{!summary && <div className="empty-description">Click to view details</div>}
@@ -88,23 +85,26 @@ export class ProductList extends Component<any, ProductListState> {
 
 	render() {
 		return (
-			<div className="demo-infinite-container">
-				<InfiniteScroll initialLoad={false}
-								pageStart={0}
-								loadMore={this.handleInfiniteOnLoad}
-								hasMore={!this.state.isLoading && this.state.hasMore}
-								useWindow={true}>
-					<List dataSource={this.state.loadedProducts}
-						  itemLayout="vertical"
-						  renderItem={product => this.createProductRow(product)}>
-						{this.state.isLoading && this.state.hasMore && (
-							<div className="demo-loading-container">
-								<Spin/>
-							</div>
-						)}
-					</List>
-				</InfiniteScroll>
-			</div>
+			<>
+				<div className="demo-infinite-container">
+					<InfiniteScroll initialLoad={false}
+									pageStart={0}
+									loadMore={this.handleInfiniteOnLoad}
+									hasMore={!this.state.isLoading && this.state.hasMore}
+									useWindow={true}>
+						<List dataSource={this.state.loadedProducts}
+							  itemLayout="vertical"
+							  renderItem={product => this.createProductRow(product)}>
+							{this.state.isLoading && this.state.hasMore && (
+								<div className="demo-loading-container">
+									<Spin/>
+								</div>
+							)}
+						</List>
+					</InfiniteScroll>
+				</div>
+				<BackTop/>
+			</>
 		);
 	}
 

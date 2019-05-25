@@ -30,7 +30,9 @@ export default class Product {
 	}
 
 	private removeInvalidUTF(): void {
-		this.productName = StringUtil.fixInvalidUTF(this.productName);
+		this.productName = StringUtil.removeInvalidCharacters(this.productName);
+		this.shortDescription = StringUtil.removeInvalidCharacters(this.shortDescription);
+		this.longDescription = StringUtil.removeInvalidCharacters(this.longDescription);
 	}
 
 	getSummary(): string | null {
