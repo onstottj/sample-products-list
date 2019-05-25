@@ -80,6 +80,10 @@ export class ProductList extends Component<any, ProductListState> {
 					{/*	dangerouslySetInnerHTML is used in order to display the description's HTML... we're
 					trusting the DB for having safe data to display, but typically we wouldn't do this */}
 					<div dangerouslySetInnerHTML={{__html: product.shortDescription || '<i>View details</i>'}}/>
+					<div className="card-overlay view-details-overlay">
+						View Details
+					</div>
+					<div className="card-overlay bottom-white-mask"/>
 				</Card>
 			</List.Item>
 		);
@@ -88,7 +92,7 @@ export class ProductList extends Component<any, ProductListState> {
 	render() {
 		return (
 			<>
-				<div className="demo-infinite-container">
+				<div className="infinite-container">
 					<InfiniteScroll initialLoad={false}
 									pageStart={0}
 									loadMore={this.handleInfiniteOnLoad}
@@ -107,14 +111,14 @@ export class ProductList extends Component<any, ProductListState> {
 							  }}
 							  renderItem={product => this.createProductRow(product)}>
 							{this.state.isLoading && this.state.hasMore && (
-								<div className="demo-loading-container">
+								<div className="loading-container">
 									<Spin/>
 								</div>
 							)}
 						</List>
 					</InfiniteScroll>
 				</div>
-				<BackTop/>
+				<BackTop className="back-to-top-indicator"/>
 			</>
 		);
 	}
