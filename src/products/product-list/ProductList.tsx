@@ -1,16 +1,16 @@
-import React, { Component, ReactElement } from 'react';
+import React, { Component } from 'react';
 import { BackTop, Empty, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import Product from '../Product';
 import ProductListResponse from '../ProductListResponse';
 import { ProductApi } from '../ProductApi';
-import ProductCard from './ProductCard';
+import ProductCard, { OnProductSelected } from './ProductCard';
 import './ProductList.scss';
 
 type ProductListProps = {
 	isDisplayed: boolean,
 	onProductsLoaded: () => void,
-};
+} & OnProductSelected;
 
 type ProductListState = {
 	loadedProducts: Product[],
@@ -95,9 +95,10 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 						<div className="product-grid">
 							{this.state.loadedProducts.length === 0 && <Empty description="No Products Available"/>}
 							{this.state.loadedProducts.map(product => (
-								<ProductCard key={product.productId} product={product}/>
+								<ProductCard key={product.productId} product={product} onProductSelected={this.props.onProductSelected}/>
 							))}
-							{showLoadingIndicator && <Spin className="loading-more-indicator" tip="Loading more..." size="large"/>}
+							{showLoadingIndicator &&
+							<Spin className="loading-more-indicator" tip="Loading more..." size="large"/>}
 						</div>
 					</InfiniteScroll>
 				</div>

@@ -3,9 +3,14 @@ import React, { Component, ReactElement } from 'react';
 import Product from '../Product';
 import './ProductCard.scss';
 
-type ProductCardProps = {
-	product: Product
+// Define the handler once (it is used in several 'props' objects)
+export type OnProductSelected = {
+	onProductSelected: (product: Product | null) => void,
 }
+
+type ProductCardProps = {
+	product: Product,
+} & OnProductSelected
 
 export default class ProductCard extends Component<ProductCardProps> {
 
@@ -13,6 +18,7 @@ export default class ProductCard extends Component<ProductCardProps> {
 		super(props);
 
 		this.getActions = this.getActions.bind(this);
+		this.viewDetails = this.viewDetails.bind(this);
 	}
 
 	private getActions(): ReactElement[] {
@@ -20,6 +26,10 @@ export default class ProductCard extends Component<ProductCardProps> {
 			return [this.createReviewsElement()];
 		}
 		return [];
+	}
+
+	private viewDetails(): void {
+		this.props.onProductSelected(this.props.product);
 	}
 
 	private createReviewsElement(): ReactElement {
@@ -36,7 +46,7 @@ export default class ProductCard extends Component<ProductCardProps> {
 		const product = this.props.product;
 		const imageUrl = product.getImageUrl();
 		return (
-			<Card actions={this.getActions()}>
+			<Card className="product-card" actions={this.getActions()} onClick={this.viewDetails}>
 				<div className="product-card-content">
 					<div className="product-name">{product.productName}</div>
 

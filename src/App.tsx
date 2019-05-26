@@ -1,22 +1,44 @@
 import React, { useState } from 'react';
 import { Layout, Spin } from 'antd';
 import { ProductList } from './products/product-list/ProductList';
+import ProductDetailsDialog from './products/product-details-dialog/ProductDetailsDialog';
+import Product from './products/Product';
 import './App.scss';
 
 // Functional components are used for simple things; once a component grows enough that methods are useful,
 // it is changed into a class (at least that's my approach).
 const App = () => {
-	const [hasProducts, setHasProducts] = useState(false);
+	const [hasProducts, setHasProducts] = useState<boolean>(false);
+
+	// State and handling of events for the Product Details Dialog
+	const [isProductDialogVisible, setProductDialogVisible] = useState<boolean>(false);
+	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+	const onProductSelected = (product: Product | null) => {
+		setSelectedProduct(product);
+		setProductDialogVisible(true);
+	};
+	const onDialogCloseTriggered = () => {
+		setProductDialogVisible(false);
+	};
+
 	return (
-		<Layout>
-			<Layout.Header>
-				<h1>Sample Store</h1>
-			</Layout.Header>
-			<Layout.Content>
-				{!hasProducts && <div className="initial-spinner"><Spin tip="Loading..." size="large"/></div>}
-				<ProductList isDisplayed={hasProducts} onProductsLoaded={() => setHasProducts(true)}/>
-			</Layout.Content>
-		</Layout>
+		<>
+			<Layout>
+				<Layout.Header>
+					<h1>Sample Store</h1>
+				</Layout.Header>
+				<Layout.Content>
+					{!hasProducts && <div className="initial-spinner"><Spin tip="Loading..." size="large"/></div>}
+					<ProductList isDisplayed={hasProducts}
+								 onProductsLoaded={() => setHasProducts(true)}
+								 onProductSelected={onProductSelected}/>
+				</Layout.Content>
+			</Layout>
+
+			<ProductDetailsDialog visible={isProductDialogVisible}
+								  product={selectedProduct}
+								  closeTriggered={onDialogCloseTriggered}/>
+		</>
 	);
 };
 

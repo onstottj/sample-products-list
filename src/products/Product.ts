@@ -33,7 +33,7 @@ export default class Product {
 	}
 
 	getImageUrl(): string | null {
-		return this.productImage ? `${ProductApi.baseUrl}/${this.productImage}` : null;
+		return this.productImage ? `${ProductApi.baseUrl}${this.productImage}` : null;
 	}
 
 }
