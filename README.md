@@ -1,5 +1,5 @@
-Sample store web app
-====================
+Sample store / products list
+============================
 
 Running 
 -------
@@ -14,8 +14,9 @@ Running
 Features
 --------
 
- * Infinite scrolling for the products list
- * Mobile-friendly using responsive design 
+ * Product list with infinite scrolling
+ * Full product details in a dialog
+ * This is mobile friendly using responsive design 
 
 Tech & tools
 ------------

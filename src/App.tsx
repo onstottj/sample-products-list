@@ -26,7 +26,10 @@ const App = () => {
 		<>
 			<Layout>
 				<Layout.Header>
-					<h1>Sample Store</h1>
+					<div className="company-info">
+						<img src="/acme.jpg" alt="ACME Co"/>
+						<h1>ACME Co.</h1>
+					</div>
 					<Icon type="shopping-cart"/>
 				</Layout.Header>
 				<Layout.Content>

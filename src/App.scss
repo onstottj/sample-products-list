@@ -5,7 +5,7 @@
 
 	.ant-layout {
 		height: 100%;
-		
+
 		.ant-layout-header {
 			// Fixed header, based on https://ant.design/components/layout/#components-layout-demo-fixed
 			position: fixed;
@@ -16,17 +16,28 @@
 
 			display: flex;
 			justify-content: space-between;
+			align-items: center;
 
 			background-color: midnightblue;
 			box-shadow: 0 0 2px 2px dimgray;
 
-			h1 {
-				color: white;
-				font-style: italic;
+			.company-info {
+				display: flex;
+				align-items: center;
+
+				img {
+					max-height: 50px;
+				}
+
+				h1 {
+					color: white;
+					font-style: italic;
+					margin-left: 15px;
+					margin-bottom: 0;
+				}
 			}
 
 			.anticon {
-				align-self: center;
 				color: white;
 				font-size: 3em;
 			}
