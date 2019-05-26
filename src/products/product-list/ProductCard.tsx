@@ -24,7 +24,7 @@ export default class ProductCard extends Component<ProductCardProps> {
 
 	private getActions(): ReactElement[] {
 		const product = this.props.product;
-		if (typeof product.reviewRating === 'number') {
+		if (product.reviewRating) {
 			return [<ProductReviews product={product}/>];
 		}
 		return [];

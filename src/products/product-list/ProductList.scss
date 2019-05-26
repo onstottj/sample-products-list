@@ -23,7 +23,7 @@
 		.product-grid {
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: space-around;
+			justify-content: space-evenly;
 			align-items: center;
 
 			max-width: ($card-width + 50px) * 6;

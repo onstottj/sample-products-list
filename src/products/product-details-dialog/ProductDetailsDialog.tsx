@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Button, Card, Modal } from 'antd';
+import { Button, Card, Modal, Statistic } from 'antd';
 import Product from '../Product';
+import ProductReviews from '../ProductReviews';
 import './ProductDetailsDialog.scss';
 
 type ProductDetailsDialogProps = {
@@ -45,6 +46,20 @@ const ProductDetailsDialog = (props: ProductDetailsDialogProps) => {
 					<img src={productImage} alt={product.productName}/>
 				</div>
 			)}
+
+			{/* Price, availability, & reviews */}
+			<div className="dialog-price-availability-reviews">
+				<div className="small-column">
+					<Statistic value={product.price}/>
+
+					<div className="dialog-stock">
+						{product.inStock && <div className="dialog-in-stock">In stock</div>}
+						{!product.inStock && <div className="dialog-out-of-stock">Out of stock</div>}
+					</div>
+				</div>
+
+				<ProductReviews product={product}/>
+			</div>
 
 			<div className="dialog-descriptions">
 				{/* Highlights card */}

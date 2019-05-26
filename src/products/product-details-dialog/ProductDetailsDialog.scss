@@ -6,6 +6,10 @@
 		max-height: 50vh;
 		overflow-y: auto;
 
+		h2 {
+			text-align: center;
+		}
+
 		.dialog-image {
 			text-align: center;
 
@@ -14,16 +18,44 @@
 			}
 		}
 
+		.dialog-price-availability-reviews {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: $larger-font;
+
+			.small-column {
+				text-align: center;
+			}
+
+			.dialog-stock {
+				margin: 0 50px;
+				font-style: italic;
+			}
+
+			.dialog-in-stock {
+				color: green;
+			}
+
+			.dialog-out-of-stock {
+				color: red;
+			}
+		}
+
 		.dialog-descriptions {
 			display: flex;
+			flex-wrap: wrap;
 			align-items: start;
 
 			.dialog-highlights {
+				margin-top: $dialog-spacing;
 				max-width: 400px;
 				margin-right: $dialog-spacing;
 			}
 
 			.dialog-long-description {
+				// margin-top is on both of these so that margins will still look good if there is flex-wrapping
+				margin-top: $dialog-spacing;
 				flex: 1;
 			}
 		}

@@ -9,10 +9,12 @@ type ProductReviewsProps = {
 
 const ProductReviews = (props: ProductReviewsProps) => {
 	const product = props.product;
+	const reviewCount = product.reviewCount;
+	const reviewText = reviewCount && `${reviewCount} review${reviewCount !== 1 ? 's' : ''}`;
 	return (
 		<div className="product-reviews">
 			<Rate value={product.reviewRating} allowHalf={true} disabled/>
-			<div>{product.reviewCount} reviews</div>
+			<div>{reviewText}</div>
 		</div>
 	);
 };
