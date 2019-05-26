@@ -10,15 +10,25 @@
 			// Fixed header, based on https://ant.design/components/layout/#components-layout-demo-fixed
 			position: fixed;
 			width: 100%;
-			z-index: $highest-z-index;
-			background-color: midnightblue;
 			height: $header-height;
 			line-height: $header-height;
+			z-index: $highest-z-index;
+
+			display: flex;
+			justify-content: space-between;
+
+			background-color: midnightblue;
 			box-shadow: 0 0 2px 2px dimgray;
 
 			h1 {
 				color: white;
 				font-style: italic;
+			}
+
+			.anticon {
+				align-self: center;
+				color: white;
+				font-size: 3em;
 			}
 		}
 

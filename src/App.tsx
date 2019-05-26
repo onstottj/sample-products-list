@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout } from 'antd';
+import { Icon, Layout } from 'antd';
 import { ProductList } from './products/product-list/ProductList';
 import PlaceholderList from './products/placeholders/PlaceholderList';
 import ProductDetailsDialog from './products/product-details-dialog/ProductDetailsDialog';
@@ -27,6 +27,7 @@ const App = () => {
 			<Layout>
 				<Layout.Header>
 					<h1>Sample Store</h1>
+					<Icon type="shopping-cart"/>
 				</Layout.Header>
 				<Layout.Content>
 					{!hasProducts && <PlaceholderList/>}
