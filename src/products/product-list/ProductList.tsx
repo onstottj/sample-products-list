@@ -5,6 +5,7 @@ import Product from '../Product';
 import ProductListResponse from '../ProductListResponse';
 import { ProductApi } from '../ProductApi';
 import ProductCard, { OnProductSelected } from './ProductCard';
+import ResponsiveGrid from '../../shared-components/ResponsiveGrid';
 import './ProductList.scss';
 
 type ProductListProps = {
@@ -100,14 +101,14 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 									loadMore={this.handleInfiniteOnLoad}
 									hasMore={!this.state.isLoading && this.state.hasMore}
 									useWindow={false}>
-						<div className="product-grid">
+						<ResponsiveGrid>
 							{this.state.loadedProducts.length === 0 && <Empty description="No Products Available"/>}
 							{this.state.loadedProducts.map(product => (
 								<ProductCard key={product.productId} product={product} onProductSelected={this.props.onProductSelected}/>
 							))}
 							{showLoadingIndicator &&
 							<Spin className="loading-more-indicator" tip="Loading more..." size="large"/>}
-						</div>
+						</ResponsiveGrid>
 					</InfiniteScroll>
 				</div>
 				<BackTop/>

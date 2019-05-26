@@ -24,3 +24,12 @@ Tech & tools
  * The basics for this React app was set up with create-react-app
  * TypeScript is used
  * Ant Design is the UI library
+
+Future enhancements
+-------------------
+
+ * It would be nice to do more separation of presentational vs container components
+ * Redux could be added when the app grows more complex
+ * Add unit tests
+ * Add sample screenshots to the readme
+ * Setup routing

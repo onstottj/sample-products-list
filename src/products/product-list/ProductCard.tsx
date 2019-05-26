@@ -1,7 +1,7 @@
 import { Card, Statistic } from 'antd';
 import React, { Component, ReactElement } from 'react';
 import Product from '../Product';
-import ProductReviews from '../ProductReviews';
+import ProductReviews from '../../shared-components/ProductReviews';
 import './ProductCard.scss';
 
 // Define the handler once (it is used in several 'props' objects)

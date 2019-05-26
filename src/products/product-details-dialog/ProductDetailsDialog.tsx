@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Card, Modal, Statistic } from 'antd';
 import Product from '../Product';
-import ProductReviews from '../ProductReviews';
+import ProductReviews from '../../shared-components/ProductReviews';
 import './ProductDetailsDialog.scss';
 
 type ProductDetailsDialogProps = {

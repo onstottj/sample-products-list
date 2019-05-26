@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rate } from 'antd';
-import Product from './Product';
+import Product from '../products/Product';
 import './ProductReviews.scss';
 
 type ProductReviewsProps = {
