@@ -6,11 +6,13 @@ const PlaceholderList = () => {
 	const cardCount = 6 * 6;
 	return (
 		<div className="product-list">
-			<div className="product-grid">
-				{/* An interesting approach from https://stackoverflow.com/a/39232049/132374 */}
-				{Array.from({length: cardCount}).map(() => (
-					<PlaceholderCard/>
-				))}
+			<div className="infinite-container">
+				<div className="product-grid">
+					{/* An interesting approach from https://stackoverflow.com/a/39232049/132374 */}
+					{Array.from({length: cardCount}).map(() => (
+						<PlaceholderCard/>
+					))}
+				</div>
 			</div>
 		</div>
 	);

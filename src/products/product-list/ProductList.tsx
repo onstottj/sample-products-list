@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BackTop, Empty, Spin } from 'antd';
+import { BackTop, Empty, notification, Spin } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import Product from '../Product';
 import ProductListResponse from '../ProductListResponse';
@@ -41,17 +41,24 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 	}
 
 	async componentDidMount(): Promise<void> {
-		// TODO: add error msg
 		const products = await this.fetchData();
 		this.onProductsLoaded(products);
 	}
 
 	private async fetchData(): Promise<Product[]> {
-		// TODO: add error handler
-		const response = await ProductApi.getProducts(this.currentPage, ProductList.pageSize);
-		this.checkForMoreProducts(response);
-		this.currentPage++;
-		return response.products;
+		try {
+			const response = await ProductApi.getProducts(this.currentPage, ProductList.pageSize);
+			this.checkForMoreProducts(response);
+			this.currentPage++;
+			return response.products;
+		} catch (e) {
+			notification['error']({
+				message: 'Error',
+				description: 'Unable to load product data.  There may have been a network error; do you need the plugin to bypass CORS?',
+				duration: null,
+			});
+			throw e;
+		}
 	}
 
 	private onProductsLoaded(products: Product[]): void {
