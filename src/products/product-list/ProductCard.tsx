@@ -1,6 +1,7 @@
-import { Card, Rate, Statistic } from 'antd';
+import { Card, Statistic } from 'antd';
 import React, { Component, ReactElement } from 'react';
 import Product from '../Product';
+import ProductReviews from '../ProductReviews';
 import './ProductCard.scss';
 
 // Define the handler once (it is used in several 'props' objects)
@@ -22,24 +23,15 @@ export default class ProductCard extends Component<ProductCardProps> {
 	}
 
 	private getActions(): ReactElement[] {
-		if (typeof this.props.product.reviewRating === 'number') {
-			return [this.createReviewsElement()];
+		const product = this.props.product;
+		if (typeof product.reviewRating === 'number') {
+			return [<ProductReviews product={product}/>];
 		}
 		return [];
 	}
 
 	private viewDetails(): void {
 		this.props.onProductSelected(this.props.product);
-	}
-
-	private createReviewsElement(): ReactElement {
-		const product = this.props.product;
-		return (
-			<div className="product-reviews">
-				<Rate value={product.reviewRating} allowHalf={true} disabled/>
-				<div>{product.reviewCount} reviews</div>
-			</div>
-		);
 	}
 
 	render(): ReactElement {

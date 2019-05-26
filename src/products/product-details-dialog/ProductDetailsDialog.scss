@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .product-details-modal {
 
 	.ant-modal-body {
@@ -18,7 +20,7 @@
 
 			.dialog-highlights {
 				max-width: 400px;
-				margin-right: 24px;
+				margin-right: $dialog-spacing;
 			}
 
 			.dialog-long-description {
