@@ -11,27 +11,19 @@
 			position: fixed;
 			width: 100%;
 			z-index: $highest-z-index;
-			background-color: dimgray;
+			background-color: midnightblue;
 			height: $header-height;
 			line-height: $header-height;
-			box-shadow: 0 0 2px 2px darkgray;
+			box-shadow: 0 0 2px 2px dimgray;
 
 			h1 {
 				color: white;
-				text-align: center;
 				font-style: italic;
 			}
 		}
 
 		.ant-layout-content {
 			margin-top: $header-height;
-
-			.initial-spinner {
-				height: 100%;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
 		}
 	}
 }

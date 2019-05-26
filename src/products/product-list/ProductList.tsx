@@ -83,6 +83,7 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 
 	render() {
 		const showLoadingIndicator = this.state.isLoading && this.state.hasMore;
+		// This list component is in the DOM before data is loaded, so use 'display: none' as needed
 		const classes = `product-list ${!this.props.isDisplayed ? 'hidden' : ''}`;
 		return (
 			<div className={classes}>

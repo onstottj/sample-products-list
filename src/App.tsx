@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Layout, Spin } from 'antd';
+import { Layout } from 'antd';
 import { ProductList } from './products/product-list/ProductList';
+import PlaceholderList from './products/placeholders/PlaceholderList';
 import ProductDetailsDialog from './products/product-details-dialog/ProductDetailsDialog';
 import Product from './products/Product';
 import './App.scss';
@@ -28,7 +29,7 @@ const App = () => {
 					<h1>Sample Store</h1>
 				</Layout.Header>
 				<Layout.Content>
-					{!hasProducts && <div className="initial-spinner"><Spin tip="Loading..." size="large"/></div>}
+					{!hasProducts && <PlaceholderList/>}
 					<ProductList isDisplayed={hasProducts}
 								 onProductsLoaded={() => setHasProducts(true)}
 								 onProductSelected={onProductSelected}/>
