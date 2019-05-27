@@ -30,6 +30,9 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 		hasMore: true,
 	};
 
+	/** Needed for the back-to-top icon */
+	private scrollableListRef = React.createRef<HTMLDivElement>();
+
 	private currentPage = 1;
 
 	constructor(props: Readonly<ProductListProps>) {
@@ -95,7 +98,7 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 		const classes = `product-list ${!this.props.isDisplayed ? 'hidden' : ''}`;
 		return (
 			<div className={classes}>
-				<div className="infinite-container">
+				<div className="infinite-container" ref={this.scrollableListRef}>
 					<InfiniteScroll initialLoad={false}
 									pageStart={0}
 									loadMore={this.handleInfiniteOnLoad}
@@ -111,7 +114,8 @@ export class ProductList extends Component<ProductListProps, ProductListState> {
 						</ResponsiveGrid>
 					</InfiniteScroll>
 				</div>
-				<BackTop/>
+				{/* TODO: 'as HTMLDivElement' is a workaround to keep TypeScript happy; find a better way to deal with this */}
+				<BackTop target={() => this.scrollableListRef.current as HTMLDivElement}/>
 			</div>
 		);
 	}

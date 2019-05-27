@@ -33,6 +33,7 @@ Future enhancements
 -------------------
 
  * Add list sorting & filtering (would need backend support)
+ * Add shopping cart functionality
  * Setup routing
  * Add more unit tests (there's not much logic to test so far)
  * Do more separation of presentational vs container components
