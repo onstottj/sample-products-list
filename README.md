@@ -1,6 +1,8 @@
 Sample store / products list
 ============================
 
+![](https://lh6.googleusercontent.com/LQ8anw-4dNVNm5oTRz3doutvVgpqPwb_dli5nKxw0M1ZFG5XV-sEWMwR1cCg44aOmwipd6L82OtM5g=w1918-h1654 "Product list")
+
 Running 
 -------
 
