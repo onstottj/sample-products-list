@@ -49,7 +49,7 @@ const ProductDetailsDialog = (props: ProductDetailsDialogProps) => {
 
 			{/* Price, availability, & reviews */}
 			<div className="dialog-price-availability-reviews">
-				<div className="small-column">
+				<div className="price-column">
 					<Statistic value={product.price}/>
 
 					<div className="dialog-stock">

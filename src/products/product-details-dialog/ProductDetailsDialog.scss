@@ -20,12 +20,19 @@
 
 		.dialog-price-availability-reviews {
 			display: flex;
+			flex-wrap: wrap;
 			justify-content: center;
 			align-items: center;
+			margin-top: -$dialog-spacing; // a 'creative' approach for adding spacing only when wrapping flex items: https://stackoverflow.com/a/30891910/132374
 			font-size: $larger-font;
 
-			.small-column {
+			.price-column {
+				margin-top: $dialog-spacing;
 				text-align: center;
+			}
+
+			.product-reviews {
+				margin-top: $dialog-spacing;
 			}
 
 			.dialog-stock {

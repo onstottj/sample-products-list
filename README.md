@@ -11,6 +11,8 @@ Running
 5. If products don't load shortly, you may need a CORS bypass extension. "Moesif Origin & CORS Changer" 
    for Chrome works well (you just have to install it and click the icon to enable it). 
 
+To execute the unit tests, run `npm test`.
+
 Features
 --------
 
@@ -28,8 +30,7 @@ Tech & tools
 Future enhancements
 -------------------
 
- * It would be nice to do more separation of presentational vs container components
- * Redux could be added when the app grows more complex
- * Add unit tests
- * Add sample screenshots to the readme
  * Setup routing
+ * Add more unit tests (there's not much logic to test so far)
+ * Do more separation of presentational vs container components
+ * Redux could be added when the app grows more complex
