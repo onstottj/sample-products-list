@@ -1,4 +1,4 @@
-import { Card, Statistic } from 'antd';
+import { Card, Icon, Statistic } from 'antd';
 import React, { Component, ReactElement } from 'react';
 import Product from '../Product';
 import ProductReviews from '../../shared-components/ProductReviews';
@@ -13,19 +13,41 @@ type ProductCardProps = {
 	product: Product,
 } & OnProductSelected
 
-export default class ProductCard extends Component<ProductCardProps> {
+type ProductCardState = {
+	isHovered: boolean
+}
+
+export default class ProductCard extends Component<ProductCardProps, ProductCardState> {
+
+	state: ProductCardState = {
+		isHovered: false
+	};
 
 	constructor(props: Readonly<ProductCardProps>) {
 		super(props);
 
+		this.onMouseEnter = this.onMouseEnter.bind(this);
+		this.onMouseLeave = this.onMouseLeave.bind(this);
 		this.getActions = this.getActions.bind(this);
 		this.viewDetails = this.viewDetails.bind(this);
+	}
+
+	private onMouseEnter(): void {
+		this.setState({isHovered: true});
+	}
+
+	private onMouseLeave(): void {
+		this.setState({isHovered: false});
 	}
 
 	private getActions(): ReactElement[] {
 		const product = this.props.product;
 		if (product.reviewRating) {
-			return [<ProductReviews product={product}/>];
+			const actions: ReactElement[] = [<ProductReviews product={product}/>];
+			if (this.state.isHovered) {
+				actions.push(<Icon className="add-to-cart-icon" type="shopping-cart"/>);
+			}
+			return actions;
 		}
 		return [];
 	}
@@ -38,7 +60,11 @@ export default class ProductCard extends Component<ProductCardProps> {
 		const product = this.props.product;
 		const imageUrl = product.getImageUrl();
 		return (
-			<Card className="product-card" actions={this.getActions()} onClick={this.viewDetails}>
+			<Card className="product-card"
+				  actions={this.getActions()}
+				  onMouseEnter={this.onMouseEnter}
+				  onMouseLeave={this.onMouseLeave}
+				  onClick={this.viewDetails}>
 				<div className="product-card-content">
 					<div className="product-name">{product.productName}</div>
 
